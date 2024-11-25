@@ -1,10 +1,13 @@
 # tabs_and_chords_screens
 Automatic screenshot from tabs websites
 
-tuto : 
+tuto screenshot: 
 * execute the chords.bat
+* paste the webpage url
 * it takes a screen shot of the webpage
-* save it to your computer
-* create a markdown file
-* integrate the image et define metadata
+* saves it to your computer
+* creates a markdown file
+* integrates the image and fill metadata
 
+tuto chordpro:
+* WIP
