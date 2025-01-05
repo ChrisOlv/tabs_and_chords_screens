@@ -60,10 +60,10 @@ date: {current_date}
     print(f"Fichier Markdown créé : {markdown_path}")
     return markdown_path
 
-# Boucle principale pour demander une nouvelle URL et exécuter le script
+# Boucle
 while True:
-    url = input("Veuillez entrer l'URL de la page web (ou tapez 'exit' pour quitter) : ")
-    if url.lower() == 'exit':
+    url = input("Veuillez entrer l'URL de la page web (ou tapez 'q' pour quitter) : ")
+    if url.lower() == 'q':
         print("Fermeture du programme.")
         break
 
