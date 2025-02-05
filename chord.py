@@ -1,7 +1,11 @@
 import os
 from datetime import datetime
 
-def create_markdown_with_image(url, height=58000, markdown_dir="D:/9. NAS drive/Smartnotes/Smartnotes2024/30.interets/31. Guitare", image_dir="D:/9. NAS drive/Smartnotes/Smartnotes2024/30.interets/31. Guitare/img"):
+
+
+
+
+def create_markdown_with_image(url, height=58000, markdown_dir="D:/smartnotes_git_202502/30.interets/31. Guitare", image_dir="D:/smartnotes_git_202502/30.interets/31. Guitare/img"):
     """
     Capture une page web, stocke l'image dans un répertoire, et génère un fichier Markdown avec l'image.
 
