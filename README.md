@@ -11,9 +11,11 @@ This Python scrip takes screenshot of tabs / chords from music websites
 
 ## Metadata :
 Artist is [[ surrounded ]] in order to be recognize as local link in Obsidian.
+``` md
 title: {song_name}
 artiste: "[[{artist}]]"
 date: {current_date}
+```
 
 ## Reco
 I recommand using a local markdown software to read and organize your tabs. I personnaly prefer Obsidian, but it's up to you.
