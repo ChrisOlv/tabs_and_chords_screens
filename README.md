@@ -1,4 +1,4 @@
-# tabs_and_chords_screens
+# Tabs and chords screens
 This Python scrip takes screenshot of tabs / chords from music websites
 
 ## How does it work ? 
