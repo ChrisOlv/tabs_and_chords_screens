@@ -25,13 +25,15 @@ async def create_markdown_with_image(
     title = url.split("/")[-1]
 
     # Étape 2 : Formater le nom de la chanson (supprimer les suffixes et remplacer les tirets par des espaces)
-    song_name = "-".join(title.split("-")[:-2]).replace("-", " ")
+    song_name = "-".join(title.split("-")[:-1]).replace("-", " ")
 
     # Étape 3 : Extraire le nom de l'artiste
     artist = url.split("/")[-2]
 
     # Étape 4 : Construire le nom du fichier image et Markdown
-    output_filename = f"{artist} - {song_name}.png"
+    today = datetime.now().strftime("%Y-%m-%d")
+    
+    output_filename = f"{artist} - {song_name} _ {today}.png"
     markdown_filename = f"{artist} - {song_name}.md"
 
     # Étape 5 : Vérifier et créer les répertoires s'ils n'existent pas
