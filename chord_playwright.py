@@ -9,14 +9,14 @@ import os
 async def create_markdown_with_image(
         url: str,
         selector: str = ".c4glK",
-        markdown_dir: str = r"Z:\test_script",
-        image_dir: str = r"Z:\test_script\img"):
+        markdown_dir: str = r"Z:\30.interets\31.Guitare",
+        image_dir: str = r"Z:\30.interets\31.Guitare\img"):
     """
     Capture une page web avec Playwright, stocke l'image et génère un fichier Markdown.
 
     Paramètres :
     - url (str) : L'URL de la page web à capturer.
-    - selector (str) : Sélecteur CSS de l'élément à capturer.
+    - selector (str) : Sélecteur CSS de l'élément à capturer, ne pas modifier
     - markdown_dir (str) : Répertoire où le fichier Markdown sera stocké.
     - image_dir (str) : Répertoire où l'image sera stockée.
     """
