@@ -9,8 +9,10 @@ import os
 async def create_markdown_with_image(
         url: str,
         selector: str = ".c4glK",
-        markdown_dir: str = r"Z:\30.interets\31.Guitare",
-        image_dir: str = r"Z:\30.interets\31.Guitare\img"):
+        markdown_dir: str = r"/mnt/DATA/4.syncthing_share/obsidian_sync/30.interets/31.Guitare", # linux
+        image_dir: str = r"/mnt/DATA/4.syncthing_share/obsidian_sync/30.interets/31.Guitare/img"): # linux
+        #markdown_dir: str = r"Z:\30.interets\31.Guitare", # pc avec anti slash, pas de raccourci windows
+        #image_dir: str = r"Z:\30.interets\31.Guitare\img"): # pc
     """
     Capture une page web avec Playwright, stocke l'image et génère un fichier Markdown.
 
