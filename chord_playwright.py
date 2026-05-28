@@ -5,6 +5,75 @@ from playwright.async_api import async_playwright
 import os
 
 
+async def dismiss_cookie_banner(page) -> bool:
+    button_names = [
+        "Accept all",
+        "Accept",
+        "I agree",
+        "Agree",
+        "Tout accepter",
+        "Accepter",
+        "OK",
+        "Got it",
+    ]
+
+    frames = [page, *page.frames]
+
+    for frame in frames:
+        for button_name in button_names:
+            for locator in (
+                frame.get_by_role("button", name=button_name),
+                frame.locator(f"button:has-text('{button_name}')"),
+                frame.locator(f"[role='button']:has-text('{button_name}')"),
+                frame.locator(f"input[type='button'][value*='{button_name}']"),
+                frame.locator(f"input[type='submit'][value*='{button_name}']"),
+            ):
+                try:
+                    if await locator.count() > 0:
+                        await locator.first.click(timeout=1500)
+                        return True
+                except Exception:
+                    continue
+
+    return False
+
+
+async def remove_overlay_elements(page) -> None:
+    # Cibler les classes UG connues + cas génériques
+    await page.add_style_tag(content="""
+        .qc-cmp-cleanslate,
+        .pxHic,
+        .g2AAe,
+        .WVQl7,
+        iframe,
+        [id^='ad_'],
+        [class*='promo'],
+        [class*='advert'],
+        [data-testid*='ad'] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+    """)
+
+    await page.evaluate("""
+        () => {
+            const selectors = ['.qc-cmp-cleanslate', '.pxHic', '.g2AAe', '.WVQl7'];
+            for (const sel of selectors) {
+                document.querySelectorAll(sel).forEach(el => el.remove());
+            }
+            // Fallback : supprimer les éléments fixed/sticky restants
+            const elements = Array.from(document.querySelectorAll('body *'));
+            for (const element of elements) {
+                const style = window.getComputedStyle(element);
+                const rect = element.getBoundingClientRect();
+                if ((style.position === 'fixed' || style.position === 'sticky') && rect.width > 80 && rect.height > 20) {
+                    element.remove();
+                }
+            }
+        }
+    """)
+
+
 
 async def create_markdown_with_image(
         url: str,
@@ -71,6 +140,17 @@ async def create_markdown_with_image(
         """)
         
         await page.goto(url, wait_until="load", timeout=60000)
+
+        for _ in range(3):
+            if await dismiss_cookie_banner(page):
+                break
+            await page.wait_for_timeout(1000)
+
+        await remove_overlay_elements(page)
+
+        # Revenir en haut pour que le scrollIntoView de Playwright
+        # ne fasse pas apparaître les éléments sticky au milieu du screenshot
+        await page.evaluate("window.scrollTo(0, 0)")
         await page.wait_for_timeout(3000)
         
         # Attendre et capturer l'élément
